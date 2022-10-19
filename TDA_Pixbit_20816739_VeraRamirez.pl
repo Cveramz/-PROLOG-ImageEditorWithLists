@@ -10,6 +10,6 @@
 %--------------- Clausulas ---------------
 
 
-%Constructor de pixbit
+%Constructor de pixbit-d
 pixbit(X,Y,Bit,Depth, [X,Y,Bit,Depth]).
 

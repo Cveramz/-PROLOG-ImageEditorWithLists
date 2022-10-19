@@ -9,6 +9,6 @@
 
 %--------------- Clausulas ---------------
 
-%Constructor de pixhex
+%Constructor de pixhex-d
 
 pixhex(X,Y,Hex,Depth, [X,Y,Hex,Depth]).
