@@ -10,5 +10,5 @@
 
 %Constructor de imagen
 
-imagen-d(Width,Height,Data, [Width,Height,Data]).
+imagen(Width,Height,Data, [Width,Height,Data]).
 

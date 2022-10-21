@@ -11,4 +11,5 @@
 
 
 %Constructor de pixbit
-pixbit-d(X,Y,Bit,Depth, [X,Y,Bit,Depth]).
+pixbit(X,Y,Bit,Depth, [X,Y,Bit,Depth]).
+

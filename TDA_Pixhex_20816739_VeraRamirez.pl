@@ -11,4 +11,4 @@
 
 %Constructor de pixhex
 
-pixhex-d(X,Y,Hex,Depth, [X,Y,Hex,Depth]).
+pixhex(X,Y,Hex,Depth, [X,Y,Hex,Depth]).

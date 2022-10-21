@@ -11,4 +11,4 @@
 
 %Constructor de pixrgb
 
-pixrgb-d(X,Y,R,G,B,Depth, [X,Y,R,G,B,Depth]).
+pixrgb(X,Y,R,G,B,Depth, [X,Y,R,G,B,Depth]).
