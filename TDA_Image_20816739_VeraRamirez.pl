@@ -63,3 +63,12 @@ imageIsCompressed(Image) :-
     Length < Width * Height.
 
 
+
+%Crear funcion que permita invertir una imagen horizontalmente
+
+imageFlipH(Image, FlippedImage) :-
+    image(Width, Height, Data, Image),
+    image(Width, Height, FlippedData, FlippedImage),
+    flipH(Height, Data, FlippedData).
+
+%debemos invertir la imagen por filas, por lo que debemos invertir cada fila de la imagen
