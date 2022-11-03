@@ -5,9 +5,9 @@
 
 %TDA IMAGE
 
-:-include("TDA_Pixbit_20816739_VeraRamirez").
-:-include("TDA_Pixhex_20816739_VeraRamirez").
-:-include("TDA_Pixrgb_20816739_VeraRamirez").
+:-use_module(tdaPixbit20816739VeraRamirez).
+:-use_module(tdaPixhex20816739VeraRamirez).
+:-use_module(tdaPixrgb20816739VeraRamirez).
 
 %--------------- Clausulas ---------------
 

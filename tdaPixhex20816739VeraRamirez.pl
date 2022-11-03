@@ -3,14 +3,13 @@
 %20.816.739-1
 %Hecho en Prolog
 
-%TDA PIXBIT
+%TDA PIXHEX
 
-
+:-module(tdaPixhex20816739VeraRamirez, [pixhex/5]).
 
 %--------------- Clausulas ---------------
 
+%Constructor de pixhex-d
 
-%Constructor de pixbit-d
-pixbit(X,Y,Bit,Depth, [X,Y,Bit,Depth]).
+pixhex(X,Y,Hex,Depth, [X,Y,Hex,Depth]).
 
-:-module(TDA_Pixbit_20816739_VeraRamirez, [pixbit/5]).
