@@ -13,3 +13,4 @@
 %Constructor de pixbit-d
 pixbit(X,Y,Bit,Depth, [X,Y,Bit,Depth]).
 
+:-module(TDA_Pixbit_20816739_VeraRamirez, [pixbit/5]).

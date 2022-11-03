@@ -12,3 +12,5 @@
 %Constructor de pixrgb-d
 
 pixrgb(X,Y,R,G,B,Depth, [X,Y,R,G,B,Depth]).
+
+module(TDA_Pixrgb_20816739_VeraRamirez, [pixrgb/7]).

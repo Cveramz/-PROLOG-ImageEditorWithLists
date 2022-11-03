@@ -12,3 +12,5 @@
 %Constructor de pixhex-d
 
 pixhex(X,Y,Hex,Depth, [X,Y,Hex,Depth]).
+
+:-module(TDA_Pixhex_20816739_VeraRamirez, [pixhex/5]).
