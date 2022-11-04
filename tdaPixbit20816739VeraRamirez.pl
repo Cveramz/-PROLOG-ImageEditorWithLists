@@ -10,6 +10,8 @@
 %--------------- Clausulas ---------------
 
 
-%Constructor de pixbit-d
+%Constructor de pixbit
+%Meta Principal: pixbit
+%Meta Secundaria: -
 pixbit(X,Y,Bit,Depth, [X,Y,Bit,Depth]).
 

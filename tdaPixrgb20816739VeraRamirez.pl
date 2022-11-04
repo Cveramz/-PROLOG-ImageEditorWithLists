@@ -10,6 +10,7 @@
 %--------------- Clausulas ---------------
 
 %Constructor de pixrgb-d
-
+%Meta Principal: pirgb
+%Meta Secundaria: -
 pixrgb(X,Y,R,G,B,Depth, [X,Y,R,G,B,Depth]).
 

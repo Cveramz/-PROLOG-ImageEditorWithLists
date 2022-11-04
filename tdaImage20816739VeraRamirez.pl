@@ -16,12 +16,14 @@
 %--------------- Clausulas ---------------
 
 %Constructor de imagen
-
+%Meta Principal: image
+%Meta secundaria: -
 image(Width,Height,Data, [Width,Height,Data]).
 
 
 %Pertenencia de Bitbit
-
+%Meta Principal: imageIsBitmap
+%Meta secundaria: isBitmap
 imageIsBitmap(Image):-
     image(_,_,Data, Image),
     isBitmap(Data).
@@ -34,7 +36,8 @@ isBitmap([Pixbit|Rest]) :-
     isBitmap(Rest).
 
 %Pertenencia de pixrgb
-
+%Meta Principal: imageIsPixmap
+%Meta secundaria: isPixmap
 imageIsPixmap(Image):-
     image(_,_,Data, Image),
     isPixmap(Data).
@@ -48,7 +51,8 @@ isPixmap([Pixrgb|Rest]) :-
     isPixmap(Rest).
 
 %Pertenencia de pixhex
-
+%Meta Principal: imageIsHexmap
+%Meta secundaria: isHexmap
 imageIsHexmap(Image):-
     image(_,_,Data, Image),
     isHexmap(Data).
@@ -60,9 +64,9 @@ isHexmap([Pixhex|Rest]) :-
     string(Hex),
     isHexmap(Rest).
 
-%Verificar si image es comprimido.
-%Cuando está comprimido, la cantidad de pixeles es menor a la multiplicación entre Width y Height.
-
+%Pertenencia de compresion
+%Meta Principal: imageIsCompressed
+%Meta secundaria: image
 imageIsCompressed(Image) :-
     image(Width, Height, Data, Image),
     length(Data, Length),
@@ -70,15 +74,14 @@ imageIsCompressed(Image) :-
 
 
 
-%Crear funcion que permita invertir una imagen horizontalmente
-
+%Flip Horizontal
+%Meta Principal: imageFlipH
+%Meta secundaria: flipH
 imageFlipH(Image, FlippedImage) :-
     image(Width, Height, Data, Image),
     image(Width, Height, FlippedData, FlippedImage),
     flipH(Height, 0, Data, FlippedData).
 
-%flipH(Height, Counter, Data, FlippedData)
-%debemos invertir la lista de pixeles, no se deben modificar la informacion de cada pixel
 
 flipH(Height, Counter, Data, FlippedData) :-
     Counter < Height,
@@ -91,26 +94,20 @@ flipH(Height, Counter, Data, FlippedData) :-
 flipH(Height, Counter, _, _) :-
     Counter >= Height.
 
-%Crear funcion que permita invertir una imagen verticalmente
-%para invertir una imagen verticalmente, primero debe ser invertida horizontalmente y luego ser invertida.
-
+%Flip Vertical
+%Meta Principal: imageFlipV
+%Meta secundaria: flipV
 imageFlipV(Image, FlippedImage) :-
     imageFlipH(Image, FlippedImageH),
     imageFlipH(FlippedImageH, FlippedImage).
 
-%crear una funcion que permita recortar una imagen, para ello debemos ir verificando que los pixeles esten dentro de los limites de la imagen
-
+%Recortar imagen
+%Meta Principal: ImageCrop
+%Meta secundaria: crop
 imageCrop(Image, X1, Y1, X2, Y2, I2) :-
     image(Width, Height, Data, Image),
     image(Width, Height, CroppedData, I2),
     crop(X1, Y1, X2, Y2, Data, CroppedData).
-
-
-
-
-%crop(X1, Y1, X2, Y2, Data, CroppedData)
-%verificar que los pixeles esten dentro de los limites de la imagen
-
 crop(X1, Y1, X2, Y2, Data, CroppedData) :-
     X1 >= 0,
     Y1 >= 0,
@@ -119,7 +116,6 @@ crop(X1, Y1, X2, Y2, Data, CroppedData) :-
     X1 =< X2,
     Y1 =< Y2,
     crop2(X1, Y1, X2, Y2, Data, CroppedData).
-
 crop2(X1, Y1, X2, Y2, Data, CroppedData) :-
     X1 =< X2,
     Y1 =< Y2,
@@ -129,13 +125,11 @@ crop2(X1, Y1, X2, Y2, Data, CroppedData) :-
     nth0(X1, CroppedRow, Pixel),
     X1_1 is X1 + 1,
     crop2(X1_1, Y1, X2, Y2, Data, CroppedData).
-
 crop2(X1, Y1, X2, Y2, Data, CroppedData) :-
     X1 > X2,
     Y1 =< Y2,
     Y1_1 is Y1 + 1,
     crop2(0, Y1_1, X2, Y2, Data, CroppedData).
-
 crop2(_, Y1, _, Y2, _, _) :-
     Y1 > Y2.
 

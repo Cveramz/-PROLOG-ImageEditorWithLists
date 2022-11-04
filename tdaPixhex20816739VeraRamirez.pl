@@ -10,6 +10,7 @@
 %--------------- Clausulas ---------------
 
 %Constructor de pixhex-d
-
+%Meta Principal: pixhex
+%Meta Secundaria: -
 pixhex(X,Y,Hex,Depth, [X,Y,Hex,Depth]).
 
