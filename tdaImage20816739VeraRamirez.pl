@@ -5,15 +5,19 @@
 
 %TDA IMAGE
 
+:-module(tdaImage20816739VeraRamirez, [image/4, imageIsBitmap/1, imageIsPixmap/1,  imageIsHexmap/1, imageIsCompressed/1 , imageFlipH/2, imageFlipV/2, crop/6]).
+
+
 :-use_module(tdaPixbit20816739VeraRamirez).
 :-use_module(tdaPixhex20816739VeraRamirez).
 :-use_module(tdaPixrgb20816739VeraRamirez).
+
 
 %--------------- Clausulas ---------------
 
 %Constructor de imagen
 
-imagen(Width,Height,Data, [Width,Height,Data]).
+image(Width,Height,Data, [Width,Height,Data]).
 
 
 %Pertenencia de Bitbit
@@ -71,6 +75,67 @@ imageIsCompressed(Image) :-
 imageFlipH(Image, FlippedImage) :-
     image(Width, Height, Data, Image),
     image(Width, Height, FlippedData, FlippedImage),
-    flipH(Height, Data, FlippedData).
+    flipH(Height, 0, Data, FlippedData).
 
-%debemos invertir la imagen por filas, por lo que debemos invertir cada fila de la imagen
+%flipH(Height, Counter, Data, FlippedData)
+%debemos invertir la lista de pixeles, no se deben modificar la informacion de cada pixel
+
+flipH(Height, Counter, Data, FlippedData) :-
+    Counter < Height,
+    nth0(Counter, Data, Row),
+    reverse(Row, FlippedRow),
+    nth0(Counter, FlippedData, FlippedRow),
+    Counter1 is Counter + 1,
+    flipH(Height, Counter1, Data, FlippedData).
+
+flipH(Height, Counter, _, _) :-
+    Counter >= Height.
+
+%Crear funcion que permita invertir una imagen verticalmente
+%para invertir una imagen verticalmente, primero debe ser invertida horizontalmente y luego ser invertida.
+
+imageFlipV(Image, FlippedImage) :-
+    imageFlipH(Image, FlippedImageH),
+    imageFlipH(FlippedImageH, FlippedImage).
+
+%crear una funcion que permita recortar una imagen, para ello debemos ir verificando que los pixeles esten dentro de los limites de la imagen
+
+imageCrop(Image, X1, Y1, X2, Y2, I2) :-
+    image(Width, Height, Data, Image),
+    image(Width, Height, CroppedData, I2),
+    crop(X1, Y1, X2, Y2, Data, CroppedData).
+
+
+
+
+%crop(X1, Y1, X2, Y2, Data, CroppedData)
+%verificar que los pixeles esten dentro de los limites de la imagen
+
+crop(X1, Y1, X2, Y2, Data, CroppedData) :-
+    X1 >= 0,
+    Y1 >= 0,
+    X2 >= 0,
+    Y2 >= 0,
+    X1 =< X2,
+    Y1 =< Y2,
+    crop2(X1, Y1, X2, Y2, Data, CroppedData).
+
+crop2(X1, Y1, X2, Y2, Data, CroppedData) :-
+    X1 =< X2,
+    Y1 =< Y2,
+    nth0(Y1, Data, Row),
+    nth0(X1, Row, Pixel),
+    nth0(Y1, CroppedData, CroppedRow),
+    nth0(X1, CroppedRow, Pixel),
+    X1_1 is X1 + 1,
+    crop2(X1_1, Y1, X2, Y2, Data, CroppedData).
+
+crop2(X1, Y1, X2, Y2, Data, CroppedData) :-
+    X1 > X2,
+    Y1 =< Y2,
+    Y1_1 is Y1 + 1,
+    crop2(0, Y1_1, X2, Y2, Data, CroppedData).
+
+crop2(_, Y1, _, Y2, _, _) :-
+    Y1 > Y2.
+
